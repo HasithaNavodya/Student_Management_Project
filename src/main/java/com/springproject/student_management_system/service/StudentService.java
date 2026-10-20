@@ -2,6 +2,7 @@ package com.springproject.student_management_system.service;
 
 import com.springproject.student_management_system.dto.StudentDto;
 
+
 import java.util.List;
 
 public interface StudentService {
@@ -11,4 +12,6 @@ public interface StudentService {
     void createStudent(StudentDto student);
 
     StudentDto getStudentById(Long studentId);
+
+    void updateStudent( StudentDto studentDto);
 }
