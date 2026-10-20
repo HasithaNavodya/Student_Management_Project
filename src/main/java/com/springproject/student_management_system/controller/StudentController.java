@@ -22,7 +22,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    //handler method to handle list students request
+    // Handler method to handle list students request
     @GetMapping("/students")
     public String listStudents(Model model){
         List<StudentDto> students = studentService.getAllStudents();
@@ -30,16 +30,16 @@ public class StudentController {
         return "students";
     }
 
-    //handler method to handle new student request
+    // Handler method to handle new student request
     @GetMapping("/students/new")
     public String newStudent(Model model){
-        //student model object to store student form data
+        // Student model object to store student form data
         StudentDto studentDto = new StudentDto();
         model.addAttribute("student", studentDto);
         return "create_student";
     }
 
-    //handler method to handle save student form submit request
+    // Handler method to handle save student form submit request
     @PostMapping("/students")
     public String saveStudents(@Valid @ModelAttribute("student") StudentDto student,
                                BindingResult result,
@@ -52,7 +52,7 @@ public class StudentController {
         return "redirect:/students";
     }
 
-    //handler method to handle edit student request
+    // Handler method to handle edit student request
     @GetMapping("/students/{studentId}/edit")
     public String editStudent(@PathVariable("studentId") Long studentId,
                               Model model){
@@ -61,7 +61,7 @@ public class StudentController {
         return "edit_student";
     }
 
-    //handler method to handle edit student form submit request
+    // Handler method to handle edit student form submit request
     @PostMapping("/students/{studentId}")
     public String updateStudent(@PathVariable("studentId") Long studentId,
                                 @Valid @ModelAttribute("student") StudentDto studentDto,
@@ -73,6 +73,13 @@ public class StudentController {
         }
         studentDto.setId(studentId);
         studentService.updateStudent(studentDto);
+        return "redirect:/students";
+    }
+
+    // Handler method to handle delete student request
+    @GetMapping("/students/{studentId}/delete")
+    public String deleteStudent(@PathVariable("studentId") Long studentId){
+        studentService.deleteStudent(studentId);
         return "redirect:/students";
     }
 }
